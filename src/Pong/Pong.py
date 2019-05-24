@@ -38,8 +38,8 @@ def initialisation():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
     ball = Ball(screen, 10, [SCREEN_SIZE[0] // 2, 10], WHITE, [1, 1])
-    pad1 = Paddle(screen, [10, 50], [10, SCREEN_SIZE[1] // 2], WHITE)
-    pad2 = Paddle(screen, [10, 50], [SCREEN_SIZE[0] - 20, SCREEN_SIZE[1] // 2], WHITE)
+    pad1 = Paddle(screen, [10, 50], [10, SCREEN_SIZE[1] // 2], WHITE, pygame.K_w, pygame.K_s, 1.5)
+    pad2 = Paddle(screen, [10, 50], [SCREEN_SIZE[0] - 20, SCREEN_SIZE[1] // 2], WHITE, pygame.K_UP, pygame.K_DOWN, 1.5)
     game_objects = [ball, pad1, pad2]
     return screen, game_objects
 
