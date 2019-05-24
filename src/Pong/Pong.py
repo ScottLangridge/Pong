@@ -18,7 +18,7 @@ def main():
 
         draw_screen(screen, game_objects)
         run_tick(game_objects)
-        sleep(0.005)
+        sleep(0.001)
 
 
 def draw_screen(screen, game_objects):
