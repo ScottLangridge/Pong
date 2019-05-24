@@ -19,6 +19,7 @@ def main():
                 exit()
 
         draw_screen(screen, game_objects)
+        run_tick(game_objects)
 
 
 def draw_screen(screen, game_objects):
@@ -26,6 +27,11 @@ def draw_screen(screen, game_objects):
     for obj in game_objects:
         obj.draw()
     pygame.display.update()
+
+
+def run_tick(game_objects):
+    for obj in game_objects:
+        obj.tick()
 
 
 def initialisation():
