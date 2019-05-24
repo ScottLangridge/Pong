@@ -1,13 +1,17 @@
 import pygame
 
+from src.Pong.GameObject import GameObject
 
-class Paddle:
-    def __init__(self, size, pos, colour, surface):
+
+class Paddle(GameObject):
+    def __init__(self, surface, size, pos, colour):
+        GameObject.__init__(self, surface, pos, colour)
         self.size = size
-        self.pos = pos
-        self.colour = colour
-        self.surface = surface
 
     def draw(self):
-        rect = self.size[0] * self.size[1]
-        pygame.draw.rect(self.surface, self.colour, rect, self.size[0])
+        x, y = self.pos[0], self.pos[1]
+        w, h = self.size[0], self.size[1]
+        pygame.draw.rect(self.surface, self.colour, (x, y, w, h))
+
+    def tick(self):
+        pass
