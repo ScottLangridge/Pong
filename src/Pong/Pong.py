@@ -64,6 +64,7 @@ def collisions(game_objects):
     if ball_x + BALL_RADIUS >= pad2_x and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
 
+
 def initialisation():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
