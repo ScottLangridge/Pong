@@ -7,8 +7,14 @@ from src.Pong.Const import *
 class Ball(GameObject):
     def __init__(self, surface, pos, colour):
         GameObject.__init__(self, surface, pos, colour)
-        self.vel = BALL_VEL
+        self.vel = BALL_START_VEL
         self.radius = BALL_RADIUS
+
+    def set_pos(self, pos):
+        self.pos = pos
+
+    def set_vel(self, vel):
+        self.vel = vel
 
     def draw(self):
         pygame.draw.circle(self.surface, self.colour, self.pos, self.radius)

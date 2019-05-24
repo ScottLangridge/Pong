@@ -37,22 +37,25 @@ def collisions(game_objects):
     ball_y = game_objects["ball"].pos[1]
 
     # Score
-    if ball_x == 0:
-        pass
     if ball_x == SCREEN_SIZE[0]:
-        pass
+        print('P1 Scores')
+        game_objects['ball'].set_pos(BALL_START_POS)
+        game_objects['ball'].set_vel(BALL_START_VEL)
+    elif ball_x == 0:
+        print('P2 Scores')
+        game_objects['ball'].set_pos(BALL_START_POS)
+        game_objects['ball'].set_vel(BALL_START_VEL)
 
-    # Bounce of top/bottom
+    # Bounce off top/bottom
     if ball_y <= BALL_RADIUS or ball_y >= SCREEN_SIZE[1] - BALL_RADIUS:
         game_objects['ball'].bounce('y')
-
 
 
 def initialisation():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
 
-    ball = Ball(screen, [MID_X, BALL_RADIUS * 2], WHITE)
+    ball = Ball(screen, BALL_START_POS[:], WHITE)
     pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y], WHITE, pygame.K_s, pygame.K_w)
     pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y], WHITE, pygame.K_DOWN, pygame.K_UP)
     game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
