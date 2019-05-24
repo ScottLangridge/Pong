@@ -21,6 +21,13 @@ class Paddle(GameObject):
         keys = pygame.key.get_pressed()
 
         if keys[self.up_key]:
-            self.pos[1] -= self.vel
+            if self.pos[1] - self.vel < 0:
+                self.pos[1] = 0
+            else:
+                self.pos[1] -= self.vel
+
         if keys[self.down_key]:
-            self.pos[1] += self.vel
+            if self.pos[1] + self.vel > SCREEN_SIZE[1] - PADDLE_HEIGHT:
+                self.pos[1] = SCREEN_SIZE[1] - PADDLE_HEIGHT
+            else:
+                self.pos[1] += self.vel
