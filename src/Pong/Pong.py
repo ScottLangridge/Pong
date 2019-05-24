@@ -7,18 +7,29 @@ from src.Pong.Const import *
 
 
 def main():
-    screen, game_objects = initialisation()
-
-    # Main Loop
+    screen = initialisation()
     while True:
+        print(rally(screen))
+
+
+def rally(screen):
+    ball = Ball(screen, BALL_START_POS[:], WHITE)
+    pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y], WHITE, pygame.K_s, pygame.K_w)
+    pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y], WHITE, pygame.K_DOWN, pygame.K_UP)
+    game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
+    scored = 0
+
+    while scored == 0:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
 
         draw_screen(screen, game_objects)
-        run_tick(game_objects)
-        sleep(0.0001)
+        scored = run_tick(game_objects)
+        sleep(SLEEP)
+
+    return scored
 
 
 def draw_screen(screen, game_objects):
@@ -29,9 +40,10 @@ def draw_screen(screen, game_objects):
 
 
 def run_tick(game_objects):
-    collisions(game_objects)
+    scored = collisions(game_objects)
     for obj in game_objects.values():
         obj.tick()
+    return scored
 
 
 def collisions(game_objects):
@@ -46,13 +58,11 @@ def collisions(game_objects):
 
     # Score
     if ball_x == SCREEN_SIZE[0]:
-        print('P1 Scores')
-        game_objects['ball'].set_pos(BALL_START_POS)
-        game_objects['ball'].set_vel(BALL_START_VEL)
+        # Indicate p1 scores
+        return 1
     elif ball_x == 0:
-        print('P2 Scores')
-        game_objects['ball'].set_pos(BALL_START_POS)
-        game_objects['ball'].set_vel(BALL_START_VEL)
+        # Indicate p2 scores
+        return 2
 
     # Bounce off top/bottom
     if ball_y <= BALL_RADIUS or ball_y >= SCREEN_SIZE[1] - BALL_RADIUS:
@@ -64,16 +74,14 @@ def collisions(game_objects):
     if ball_x + BALL_RADIUS >= pad2_x and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
 
+    # Indicate no score
+    return 0
+
 
 def initialisation():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
-
-    ball = Ball(screen, BALL_START_POS[:], WHITE)
-    pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y], WHITE, pygame.K_s, pygame.K_w)
-    pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y], WHITE, pygame.K_DOWN, pygame.K_UP)
-    game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
-    return screen, game_objects
+    return screen
 
 
 main()
