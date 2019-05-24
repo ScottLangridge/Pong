@@ -1,11 +1,15 @@
 import pygame
 
+from src.Pong.Ball import Ball
+
 BLACK = [0, 0, 0]
 WHITE = [255, 255, 255]
+SCREEN_SIZE = [1200, 800]
 
 
 def main():
     screen = initialisation()
+    ball = Ball(10, [SCREEN_SIZE[0] // 2, 10], WHITE, screen)
 
     # Main Loop
     while True:
@@ -14,18 +18,22 @@ def main():
                 pygame.quit()
                 exit()
 
-        draw_screen(screen)
+        draw_screen(screen, ball)
+        ball.tick()
 
 
-def draw_screen(screen):
+def draw_screen(screen, ball):
     screen.fill(BLACK)
+
+    # Draw ball
+    ball.draw()
+
     pygame.display.update()
 
 
 def initialisation():
     pygame.init()
-    size = 1000, 800
-    return pygame.display.set_mode(size)
+    return pygame.display.set_mode(SCREEN_SIZE)
 
 
 main()
