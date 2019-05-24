@@ -2,11 +2,10 @@ from abc import ABC, abstractmethod
 
 
 class GameObject(ABC):
-    def __init__(self, surface, pos, colour, vel=[0, 0]):
+    def __init__(self, surface, pos, colour):
         self.surface = surface
         self.pos = pos
         self.colour = colour
-        self.vel = vel
 
     @abstractmethod
     def draw(self):

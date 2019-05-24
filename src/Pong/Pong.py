@@ -2,10 +2,7 @@ import pygame
 
 from src.Pong.Ball import Ball
 from src.Pong.Paddle import Paddle
-
-BLACK = [0, 0, 0]
-WHITE = [255, 255, 255]
-SCREEN_SIZE = [1200, 800]
+from src.Pong.Const import *
 
 
 def main():
@@ -37,9 +34,10 @@ def run_tick(game_objects):
 def initialisation():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
-    ball = Ball(screen, 10, [SCREEN_SIZE[0] // 2, 10], WHITE, [1, 1])
-    pad1 = Paddle(screen, [10, 50], [10, SCREEN_SIZE[1] // 2], WHITE, pygame.K_w, pygame.K_s, 1.5)
-    pad2 = Paddle(screen, [10, 50], [SCREEN_SIZE[0] - 20, SCREEN_SIZE[1] // 2], WHITE, pygame.K_UP, pygame.K_DOWN, 1.5)
+
+    ball = Ball(screen, [MID_X, BALL_RADIUS], WHITE)
+    pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y], WHITE, pygame.K_s, pygame.K_w)
+    pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y], WHITE, pygame.K_DOWN, pygame.K_UP)
     game_objects = [ball, pad1, pad2]
     return screen, game_objects
 

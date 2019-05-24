@@ -1,13 +1,14 @@
 import pygame
 
 from src.Pong.GameObject import GameObject
+from src.Pong.Const import *
 
 
 class Paddle(GameObject):
-    def __init__(self, surface, size, pos, colour, up_key, down_key, vel):
+    def __init__(self, surface, pos, colour, down_key, up_key):
         GameObject.__init__(self, surface, pos, colour)
-        self.vel = vel
-        self.size = size
+        self.vel = PADDLE_VEL
+        self.size = [PADDLE_WIDTH, PADDLE_HEIGHT]
         self.up_key = up_key
         self.down_key = down_key
 
