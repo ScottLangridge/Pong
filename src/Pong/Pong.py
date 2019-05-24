@@ -1,5 +1,6 @@
 import pygame
 
+from time import sleep
 from src.Pong.Ball import Ball
 from src.Pong.Paddle import Paddle
 from src.Pong.Const import *
@@ -17,6 +18,7 @@ def main():
 
         draw_screen(screen, game_objects)
         run_tick(game_objects)
+        sleep(0.005)
 
 
 def draw_screen(screen, game_objects):
@@ -35,6 +37,12 @@ def run_tick(game_objects):
 def collisions(game_objects):
     ball_x = game_objects["ball"].pos[0]
     ball_y = game_objects["ball"].pos[1]
+    pad1_top = game_objects['pad1'].pos[1]
+    pad1_bot = game_objects['pad1'].pos[1] + PADDLE_HEIGHT
+    pad1_x = game_objects['pad1'].pos[0] + PADDLE_WIDTH
+    pad2_top = game_objects['pad2'].pos[1]
+    pad2_bot = game_objects['pad2'].pos[1] + PADDLE_HEIGHT
+    pad2_x = game_objects['pad2'].pos[0]
 
     # Score
     if ball_x == SCREEN_SIZE[0]:
@@ -50,6 +58,11 @@ def collisions(game_objects):
     if ball_y <= BALL_RADIUS or ball_y >= SCREEN_SIZE[1] - BALL_RADIUS:
         game_objects['ball'].bounce('y')
 
+    # Bounce off paddle
+    if ball_x - BALL_RADIUS <= pad1_x and pad1_top <= ball_y <= pad1_bot:
+        game_objects['ball'].bounce('x')
+    if ball_x + BALL_RADIUS >= pad2_x and pad2_top <= ball_y <= pad2_bot:
+        game_objects['ball'].bounce('x')
 
 def initialisation():
     pygame.init()
