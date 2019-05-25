@@ -80,11 +80,11 @@ def collisions(game_objects):
 
     # Bounce off paddle
     i = PADDLE_HEIGHT / 5
-    if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - 1 and pad1_top <= ball_y <= pad1_bot:
+    if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - PADDLE_WIDTH and pad1_top <= ball_y <= pad1_bot:
         game_objects['ball'].bounce('x')
         game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad1'])
 
-    elif ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + 1 and pad2_top <= ball_y <= pad2_bot:
+    elif ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + PADDLE_WIDTH and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
         game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad2'])
 
