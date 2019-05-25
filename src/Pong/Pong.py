@@ -71,10 +71,32 @@ def collisions(game_objects):
         game_objects['ball'].bounce('y')
 
     # Bounce off paddle
+    i = PADDLE_HEIGHT / 5
     if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - 1 and pad1_top <= ball_y <= pad1_bot:
         game_objects['ball'].bounce('x')
-    if ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + 1 and pad2_top <= ball_y <= pad2_bot:
+        if pad1_top <= ball_y <= pad1_top + i:
+            game_objects['ball'].vel[1] = -5
+        elif pad1_top + i <= ball_y <= pad1_top + 2 * i:
+            game_objects['ball'].vel[1] = -2
+        elif pad1_top + 2 * i <= ball_y <= pad1_top + 3 * i:
+            game_objects['ball'].vel[1] = 0
+        elif pad1_top + 3 * i <= ball_y <= pad1_top + 4 * i:
+            game_objects['ball'].vel[1] = 2
+        elif pad1_top + 4 * i <= ball_y <= pad1_bot:
+            game_objects['ball'].vel[1] = 5
+
+    elif ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + 1 and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
+        if pad2_top <= ball_y <= pad2_top + i:
+            game_objects['ball'].vel[1] = -5
+        elif pad2_top + i <= ball_y <= pad2_top + 2 * i:
+            game_objects['ball'].vel[1] = -2
+        elif pad2_top + 2 * i <= ball_y <= pad2_top + 3 * i:
+            game_objects['ball'].vel[1] = 0
+        elif pad2_top + 3 * i <= ball_y <= pad2_top + 4 * i:
+            game_objects['ball'].vel[1] = 2
+        elif pad2_top + 4 * i <= ball_y <= pad2_bot:
+            game_objects['ball'].vel[1] = 5
 
     # Indicate no score
     return 0
