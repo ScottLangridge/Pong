@@ -5,6 +5,7 @@ from src.Pong.Ball import Ball
 from src.Pong.Paddle import Paddle
 from src.Pong.AI_Paddle import AIPaddle
 from src.Pong.Const import *
+from random import randint
 
 
 def main():
@@ -15,9 +16,18 @@ def main():
 
 def rally(screen):
     ball = Ball(screen, BALL_START_POS[:], WHITE)
+
+    # Player controlled paddles
+    # pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE,
+    #               pygame.K_s, pygame.K_w)
+    # pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
+    #               WHITE, pygame.K_DOWN, pygame.K_UP)
+
+    # AI controlled paddles
     pad1 = AIPaddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, ball)
     pad2 = AIPaddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
                   WHITE, ball)
+
     game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
     scored = 0
 
@@ -101,7 +111,7 @@ def get_bounce_angle(ball, paddle):
 
     for i in range(-5, 6):
         if zone_start <= ball_pos <= zone_end:
-            return i
+            return i + randint(-2, 3)
         zone_start += z_width
         zone_end += z_width
 
