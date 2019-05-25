@@ -3,6 +3,7 @@ import pygame
 from time import sleep
 from src.Pong.Ball import Ball
 from src.Pong.Paddle import Paddle
+from src.Pong.AI_Paddle import AIPaddle
 from src.Pong.Const import *
 
 
@@ -14,9 +15,9 @@ def main():
 
 def rally(screen):
     ball = Ball(screen, BALL_START_POS[:], WHITE)
-    pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, pygame.K_s, pygame.K_w)
-    pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
-                  WHITE, pygame.K_DOWN, pygame.K_UP)
+    pad1 = AIPaddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, ball)
+    pad2 = AIPaddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
+                  WHITE, ball)
     game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
     scored = 0
 
