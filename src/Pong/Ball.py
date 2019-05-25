@@ -7,7 +7,7 @@ from src.Pong.Const import *
 class Ball(GameObject):
     def __init__(self, surface, pos, colour):
         GameObject.__init__(self, surface, pos, colour)
-        self.vel = BALL_START_VEL
+        self.vel = BALL_START_VEL[:]
         self.radius = BALL_RADIUS
 
     def set_pos(self, pos):
