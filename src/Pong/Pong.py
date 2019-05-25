@@ -35,9 +35,17 @@ def rally(screen):
 
 def draw_screen(screen, game_objects):
     screen.fill(BLACK)
+    draw_centre_line(screen)
     for obj in game_objects.values():
         obj.draw()
     pygame.display.update()
+
+
+def draw_centre_line(screen):
+    i = 0
+    while i <= SCREEN_SIZE[1]:
+        pygame.draw.rect(screen, WHITE, (MID_X, i, 8, 32))
+        i += 64
 
 
 def run_tick(game_objects):
