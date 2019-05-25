@@ -5,7 +5,7 @@ from src.Pong.Ball import Ball
 from src.Pong.Paddle import Paddle
 from src.Pong.AI_Paddle import AIPaddle
 from src.Pong.Const import *
-from random import randint
+from random import randint, getrandbits
 
 
 def main():
@@ -95,14 +95,14 @@ def collisions(game_objects):
     if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - PADDLE_WIDTH and pad1_top <= ball_y <= pad1_bot:
         game_objects['ball'].bounce('x')
         game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad1'])
-        if ball_vel_x < 50:
-            game_objects['ball'].vel[1] += 1
+        if getrandbits(1) == 1 and ball_vel_x < 50:
+            game_objects['ball'].vel[0] += 1
 
     elif ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + PADDLE_WIDTH and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
         game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad2'])
-        if ball_vel_x < 50:
-            game_objects['ball'].vel[1] += 1
+        if getrandbits(1) == 1 and ball_vel_x < 50:
+            game_objects['ball'].vel[0] -= 1
 
     # Indicate no score
     return 0
