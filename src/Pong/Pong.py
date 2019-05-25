@@ -79,10 +79,10 @@ def collisions(game_objects):
     pad2_x = game_objects['pad2'].pos[0]
 
     # Score
-    if ball_x == SCREEN_SIZE[0]:
+    if ball_x >= SCREEN_SIZE[0]:
         # Indicate p1 scores
         return 1
-    elif ball_x == 0:
+    elif ball_x <= 0:
         # Indicate p2 scores
         return 2
 
@@ -91,7 +91,6 @@ def collisions(game_objects):
         game_objects['ball'].bounce('y')
 
     # Bounce off paddle
-    i = PADDLE_HEIGHT / 5
     if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - PADDLE_WIDTH and pad1_top <= ball_y <= pad1_bot:
         game_objects['ball'].bounce('x')
         game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad1'])
