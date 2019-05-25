@@ -17,16 +17,17 @@ def main():
 def rally(screen):
     ball = Ball(screen, BALL_START_POS[:], WHITE)
 
-    # Player controlled paddles
-    # pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE,
-    #               pygame.K_s, pygame.K_w)
-    # pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
-    #               WHITE, pygame.K_DOWN, pygame.K_UP)
-
-    # AI controlled paddles
-    pad1 = AIPaddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, ball)
-    pad2 = AIPaddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
-                  WHITE, ball)
+    if P1_IS_AI:
+        pad1 = AIPaddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, ball)
+    else:
+        pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE,
+                      pygame.K_s, pygame.K_w)
+    if P2_IS_AI:
+        pad2 = AIPaddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
+                        WHITE, ball)
+    else:
+        pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
+                      WHITE, pygame.K_DOWN, pygame.K_UP)
 
     game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
     scored = 0
@@ -114,6 +115,7 @@ def get_bounce_angle(ball, paddle):
             return i + randint(-2, 3)
         zone_start += z_width
         zone_end += z_width
+
 
 def initialisation():
     pygame.init()
