@@ -87,7 +87,11 @@ def collisions(game_objects):
         return 2
 
     # Bounce off top/bottom
-    if ball_y <= BALL_RADIUS or ball_y >= SCREEN_SIZE[1] - BALL_RADIUS:
+    if ball_y <= BALL_RADIUS:
+        game_objects['ball'].pos[1] = BALL_RADIUS
+        game_objects['ball'].bounce('y')
+    elif ball_y >= SCREEN_SIZE[1] - BALL_RADIUS:
+        game_objects['ball'].pos[1] = SCREEN_SIZE[1] - BALL_RADIUS
         game_objects['ball'].bounce('y')
 
     # Bounce off paddle
