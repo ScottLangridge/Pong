@@ -74,33 +74,27 @@ def collisions(game_objects):
     i = PADDLE_HEIGHT / 5
     if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - 1 and pad1_top <= ball_y <= pad1_bot:
         game_objects['ball'].bounce('x')
-        if pad1_top <= ball_y <= pad1_top + i:
-            game_objects['ball'].vel[1] = -5
-        elif pad1_top + i <= ball_y <= pad1_top + 2 * i:
-            game_objects['ball'].vel[1] = -2
-        elif pad1_top + 2 * i <= ball_y <= pad1_top + 3 * i:
-            game_objects['ball'].vel[1] = 0
-        elif pad1_top + 3 * i <= ball_y <= pad1_top + 4 * i:
-            game_objects['ball'].vel[1] = 2
-        elif pad1_top + 4 * i <= ball_y <= pad1_bot:
-            game_objects['ball'].vel[1] = 5
+        game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad1'])
 
     elif ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + 1 and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
-        if pad2_top <= ball_y <= pad2_top + i:
-            game_objects['ball'].vel[1] = -5
-        elif pad2_top + i <= ball_y <= pad2_top + 2 * i:
-            game_objects['ball'].vel[1] = -2
-        elif pad2_top + 2 * i <= ball_y <= pad2_top + 3 * i:
-            game_objects['ball'].vel[1] = 0
-        elif pad2_top + 3 * i <= ball_y <= pad2_top + 4 * i:
-            game_objects['ball'].vel[1] = 2
-        elif pad2_top + 4 * i <= ball_y <= pad2_bot:
-            game_objects['ball'].vel[1] = 5
+        game_objects['ball'].vel[1] = get_bounce_angle(game_objects['ball'], game_objects['pad2'])
 
     # Indicate no score
     return 0
 
+
+def get_bounce_angle(ball, paddle):
+    z_width = PADDLE_HEIGHT / 11
+    zone_start = paddle.pos[1]
+    zone_end = paddle.pos[1] + z_width
+    ball_pos = ball.pos[1]
+
+    for i in range(-5, 6):
+        if zone_start <= ball_pos <= zone_end:
+            return i
+        zone_start += z_width
+        zone_end += z_width
 
 def initialisation():
     pygame.init()
