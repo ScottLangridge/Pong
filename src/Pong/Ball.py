@@ -9,7 +9,6 @@ class Ball(GameObject):
         GameObject.__init__(self, surface, pos, colour)
         self.vel = BALL_START_VEL
         self.radius = BALL_RADIUS
-        self.bounce_lock = 10
 
     def set_pos(self, pos):
         self.pos = pos
@@ -20,20 +19,11 @@ class Ball(GameObject):
     def draw(self):
         pygame.draw.circle(self.surface, self.colour, self.pos, self.radius)
 
-    def tick(self):
-        for i in range(2):
-            self.pos[i] += self.vel[i]
-        self.bounce_lock -= 1
-
     def bounce(self, axis):
-        if self.bounce_lock > 0:
-            return False
         if axis == 'x':
             self.vel[0] = -self.vel[0]
-            self.bounce_lock = 5
         elif axis == 'y':
             self.vel[1] = -self.vel[1]
         elif axis == 'xy':
             self.bounce('x')
             self.bounce('y')
-            self.bounce_lock = 5

@@ -14,8 +14,9 @@ def main():
 
 def rally(screen):
     ball = Ball(screen, BALL_START_POS[:], WHITE)
-    pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y], WHITE, pygame.K_s, pygame.K_w)
-    pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y], WHITE, pygame.K_DOWN, pygame.K_UP)
+    pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, pygame.K_s, pygame.K_w)
+    pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
+                  WHITE, pygame.K_DOWN, pygame.K_UP)
     game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
     scored = 0
 
@@ -49,6 +50,7 @@ def run_tick(game_objects):
 def collisions(game_objects):
     ball_x = game_objects["ball"].pos[0]
     ball_y = game_objects["ball"].pos[1]
+    ball_vel_x = game_objects["ball"].vel[0]
     pad1_top = game_objects['pad1'].pos[1]
     pad1_bot = game_objects['pad1'].pos[1] + PADDLE_HEIGHT
     pad1_x = game_objects['pad1'].pos[0] + PADDLE_WIDTH
@@ -69,9 +71,9 @@ def collisions(game_objects):
         game_objects['ball'].bounce('y')
 
     # Bounce off paddle
-    if ball_x - BALL_RADIUS <= pad1_x and pad1_top <= ball_y <= pad1_bot:
+    if ball_x - BALL_RADIUS <= pad1_x - ball_vel_x - 1 and pad1_top <= ball_y <= pad1_bot:
         game_objects['ball'].bounce('x')
-    if ball_x + BALL_RADIUS >= pad2_x and pad2_top <= ball_y <= pad2_bot:
+    if ball_x + BALL_RADIUS >= pad2_x - ball_vel_x + 1 and pad2_top <= ball_y <= pad2_bot:
         game_objects['ball'].bounce('x')
 
     # Indicate no score
