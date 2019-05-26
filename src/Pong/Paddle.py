@@ -1,33 +1,33 @@
 import pygame
 
 from src.Pong.GameObject import GameObject
+from abc import ABC, abstractmethod
 from src.Pong.Const import *
 
 
-class Paddle(GameObject):
-    def __init__(self, surface, pos, colour, down_key, up_key):
+class Paddle(GameObject, ABC):
+    def __init__(self, surface, pos, colour):
         GameObject.__init__(self, surface, pos, colour)
         self.vel = PADDLE_VEL
         self.size = [PADDLE_WIDTH, PADDLE_HEIGHT]
-        self.up_key = up_key
-        self.down_key = down_key
 
     def draw(self):
         x, y = self.pos[0], self.pos[1]
         w, h = self.size[0], self.size[1]
         pygame.draw.rect(self.surface, self.colour, (x, y, w, h))
 
+    @abstractmethod
     def tick(self):
-        keys = pygame.key.get_pressed()
+        pass
 
-        if keys[self.up_key]:
-            if self.pos[1] - self.vel < 0:
-                self.pos[1] = 0
-            else:
-                self.pos[1] -= self.vel
+    def move_up(self):
+        if self.pos[1] - self.vel < 0:
+            self.pos[1] = 0
+        else:
+            self.pos[1] -= self.vel
 
-        if keys[self.down_key]:
-            if self.pos[1] + self.vel > SCREEN_SIZE[1] - PADDLE_HEIGHT:
-                self.pos[1] = SCREEN_SIZE[1] - PADDLE_HEIGHT
-            else:
-                self.pos[1] += self.vel
+    def move_down(self):
+        if self.pos[1] + self.vel > SCREEN_SIZE[1] - PADDLE_HEIGHT:
+            self.pos[1] = SCREEN_SIZE[1] - PADDLE_HEIGHT
+        else:
+            self.pos[1] += self.vel

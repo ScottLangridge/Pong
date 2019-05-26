@@ -2,7 +2,7 @@ import pygame
 
 from time import sleep
 from src.Pong.Ball import Ball
-from src.Pong.Paddle import Paddle
+from src.Pong.PlayerPaddle import PlayerPaddle
 from src.Pong.AI_Paddle import AIPaddle
 from src.Pong.Const import *
 from random import randint, getrandbits
@@ -20,13 +20,13 @@ def rally(screen):
     if P1_IS_AI:
         pad1 = AIPaddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE, ball)
     else:
-        pad1 = Paddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE,
+        pad1 = PlayerPaddle(screen, [PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)], WHITE,
                       pygame.K_s, pygame.K_w)
     if P2_IS_AI:
         pad2 = AIPaddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
                         WHITE, ball)
     else:
-        pad2 = Paddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
+        pad2 = PlayerPaddle(screen, [SCREEN_SIZE[0] - 2 * PADDLE_WIDTH, MID_Y - int(PADDLE_HEIGHT / 2)],
                       WHITE, pygame.K_DOWN, pygame.K_UP)
 
     game_objects = {"ball": ball, "pad1": pad1, "pad2": pad2}
