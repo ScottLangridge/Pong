@@ -16,5 +16,5 @@ class AIPaddle(Paddle):
 
         if b.pos[1] < self.pos[1] + PADDLE_HEIGHT / 2:
             self.move_up()
-        elif b.pos[1] > self.pos[1] + PADDLE_HEIGHT / 2:
+        if b.pos[1] > self.pos[1] + PADDLE_HEIGHT / 2:
             self.move_down()
