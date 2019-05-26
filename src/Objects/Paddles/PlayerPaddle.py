@@ -1,6 +1,6 @@
 import pygame
 
-from src.Pong.Paddle import Paddle
+from src.Objects.Paddles.Paddle import Paddle
 
 
 class PlayerPaddle(Paddle):

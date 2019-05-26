@@ -1,8 +1,8 @@
 import pygame
 
-from src.Pong.GameObject import GameObject
+from src.Objects.GameObject import GameObject
 from abc import ABC, abstractmethod
-from src.Pong.Const import *
+from src.Const import *
 
 
 class Paddle(GameObject, ABC):

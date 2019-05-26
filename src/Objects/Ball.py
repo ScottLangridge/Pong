@@ -1,7 +1,7 @@
 import pygame
 
-from src.Pong.GameObject import GameObject
-from src.Pong.Const import *
+from src.Objects.GameObject import GameObject
+from src.Const import *
 
 
 class Ball(GameObject):

@@ -1,10 +1,10 @@
 import pygame
 
 from time import sleep
-from src.Pong.Ball import Ball
-from src.Pong.PlayerPaddle import PlayerPaddle
-from src.Pong.AI_Paddle import AIPaddle
-from src.Pong.Const import *
+from src.Objects.Ball import Ball
+from src.Objects.Paddles.PlayerPaddle import PlayerPaddle
+from src.Objects.Paddles.AI_Paddle import AIPaddle
+from src.Const import *
 from random import randint, getrandbits
 
 

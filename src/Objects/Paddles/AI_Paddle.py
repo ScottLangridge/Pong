@@ -1,5 +1,5 @@
-from src.Pong.Paddle import Paddle
-from src.Pong.Const import *
+from src.Objects.Paddles.Paddle import Paddle
+from src.Const import *
 
 
 class AIPaddle(Paddle):
